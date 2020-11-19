@@ -13,7 +13,6 @@
 | firstname_kana     | string       | null: false |
 | lastname_kana      | string       | null: false |
 | bithday            | integer      | null: false |
-| buy                |              | null: false |
 
 ### Association
 
