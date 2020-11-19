@@ -3,22 +3,23 @@
 
 ## users テーブル
 
-| Column     | Type         | Options                        |
-| ---------- | ------------ | ------------------------------ |
-| email      | string       | null: false                    |
-| password   | string       | null: false                    | 
-| nickname   | string       | null: false                    |
-| firstname  | string       | null: false                    |
-| lastname   | string       | null: false                    |
-| firstname2 | string       | null: false                    |
-| lastname2  | string       | null: false                    |
-| bithday    | integer      | null: false                    |
-| buy        | references   | null: false, foreign_key: true |
+| Column             | Type         | Options     |
+| ------------------ | ------------ | ----------- |
+| email              | string       | null: false |
+| encrypted_password | string       | null: false | 
+| nickname           | string       | null: false |
+| firstname          | string       | null: false |
+| lastname           | string       | null: false |
+| firstname_kana     | string       | null: false |
+| lastname_kana      | string       | null: false |
+| bithday            | integer      | null: false |
+| buy                | references   | null: false |
 
 ### Association
 
 - has_many :items
 - has_many :comments
+- belongs_to :buy
 
 
 
@@ -29,11 +30,16 @@
 | ----------- | ---------- | ------------------------------ |
 | itemname    | string     | null: false                    |
 | explanation | text       | null: false                    |
-| show        | text       | null: false                    |                  
-| image       |            |                                |
+| category    | text       | null: false                    |
+| status      | text       | null: false                    |
+| deli_price  | text       | null: false                    |
+| area        | text       | null: false                    |
+| deli_days   | integer    | null: false                    |
+| price       | integer    | null: false                    |
+| fee         | integer    | null: false                    |
+| profit      | integer    | null: false                    |
 | user        | references | null: false, foreign_key: true |
 | comments    | references | null: false, foreign_key: true |
-| money       | integer    | null: false                    |
 
 
 ### Association
@@ -52,10 +58,12 @@
 | carddeadline     | integer    | null: false                    |
 | cardsecuritycode | integer    | null: false                    |
 | user             | references | null: false, foreign_key: true |
+| item             | references | null: false, foreign_key: true |
 | shippingaddress  | references | null: false, foreign_key: true |
 
 ### Association
 
+- has_one :user
 - has_one :item
 - belongs_to :shippingaddres
 
@@ -63,7 +71,7 @@
 ### shippingaddress テーブル
 
 | postalcode       | integer    | null: false                    |
-| prefectures      | string     | null: false                    |
+| prefectures_id   | integer    | null: false                    |
 | municipality     | string     | null: false                    |
 | address          | integer    | null: false                    |
 | buildingname     | string     |                                |
@@ -72,7 +80,7 @@
 
 ### Association
 
-- has_one :buy
+- belongs_to :buy
 
 
 
