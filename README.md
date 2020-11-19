@@ -13,7 +13,7 @@
 | firstname_kana     | string       | null: false |
 | lastname_kana      | string       | null: false |
 | bithday            | integer      | null: false |
-| buy                | references   | null: false |
+| buy                |              | null: false |
 
 ### Association
 
@@ -31,13 +31,11 @@
 | itemname    | string     | null: false                    |
 | explanation | text       | null: false                    |
 | category    | text       | null: false                    |
-| status      | text       | null: false                    |
-| deli_price  | text       | null: false                    |
-| area        | text       | null: false                    |
+| status      | integer    | null: false                    |
+| deli_price  | integer    | null: false                    |
+| area        | integer    | null: false                    |
 | deli_days   | integer    | null: false                    |
 | price       | integer    | null: false                    |
-| fee         | integer    | null: false                    |
-| profit      | integer    | null: false                    |
 | user        | references | null: false, foreign_key: true |
 | comments    | references | null: false, foreign_key: true |
 
@@ -70,12 +68,12 @@
 
 ### shippingaddress テーブル
 
-| postalcode       | integer    | null: false                    |
+| postalcode       | string     | null: false                    |
 | prefectures_id   | integer    | null: false                    |
 | municipality     | string     | null: false                    |
 | address          | integer    | null: false                    |
 | buildingname     | string     |                                |
-| tell             | integer    | null: false                    |
+| tell             | string     | null: false                    |
 | buy              | references | null: false, foreign_key: true |
 
 ### Association
