@@ -36,7 +36,6 @@
 | deli_days_id  | integer    | null: false                    |
 | price         | integer    | null: false                    |
 | user          | references | null: false, foreign_key: true |
-| comments      | references | null: false, foreign_key: true |
 
 
 ### Association
@@ -64,7 +63,7 @@
 ### shippingaddress テーブル
 
 | postalcode       | string     | null: false                    |
-| prefectures_id   | string     | null: false                    |
+| prefectures_id   | integer    | null: false                    |
 | municipality     | string     | null: false                    |
 | address          | string     | null: false                    |
 | buildingname     | string     |                                |
