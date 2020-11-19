@@ -18,59 +18,55 @@
 
 - has_many :items
 - has_many :comments
-- belongs_to :buy
+- has_many :buy
 
 
 
 
 ## items テーブル
 
-| Column      | Type       | Options                        |
-| ----------- | ---------- | ------------------------------ |
-| itemname    | string     | null: false                    |
-| explanation | text       | null: false                    |
-| category    | text       | null: false                    |
-| status      | integer    | null: false                    |
-| deli_price  | integer    | null: false                    |
-| area        | integer    | null: false                    |
-| deli_days   | integer    | null: false                    |
-| price       | integer    | null: false                    |
-| user        | references | null: false, foreign_key: true |
-| comments    | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| itemname      | string     | null: false                    |
+| explanation   | text       | null: false                    |
+| category_id   | integer    | null: false                    |
+| status_id     | integer    | null: false                    |
+| deli_price_id | integer    | null: false                    |
+| area_id       | integer    | null: false                    |
+| deli_days_id  | integer    | null: false                    |
+| price         | integer    | null: false                    |
+| user          | references | null: false, foreign_key: true |
+| comments      | references | null: false, foreign_key: true |
 
 
 ### Association
 
 - belongs_to :user
 - has_many :comments
-- belongs_to :buy
+- has_one :buy
 
 
 
-### buyテーブル
+### buy テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| cardnum          | integer    | null: false                    |
-| carddeadline     | integer    | null: false                    |
-| cardsecuritycode | integer    | null: false                    |
 | user             | references | null: false, foreign_key: true |
 | item             | references | null: false, foreign_key: true |
-| shippingaddress  | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_one :user
-- has_one :item
-- belongs_to :shippingaddres
+- belongs_to :user
+- belongs_to :item
+- has_one :shippingaddres
 
 
 ### shippingaddress テーブル
 
 | postalcode       | string     | null: false                    |
-| prefectures_id   | integer    | null: false                    |
+| prefectures_id   | string     | null: false                    |
 | municipality     | string     | null: false                    |
-| address          | integer    | null: false                    |
+| address          | string     | null: false                    |
 | buildingname     | string     |                                |
 | tell             | string     | null: false                    |
 | buy              | references | null: false, foreign_key: true |
