@@ -18,7 +18,7 @@
 
 - has_many :items
 - has_many :comments
-- has_many :buy
+- has_many :buys
 
 
 
@@ -33,7 +33,7 @@
 | status_id     | integer    | null: false                    |
 | deli_price_id | integer    | null: false                    |
 | area_id       | integer    | null: false                    |
-| deli_days_id  | integer    | null: false                    |
+| deli_day_id   | integer    | null: false                    |
 | price         | integer    | null: false                    |
 | user          | references | null: false, foreign_key: true |
 
@@ -57,7 +57,7 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one :shippingaddres
+- has_one :shippingaddress
 
 
 ### shippingaddress テーブル
