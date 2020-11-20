@@ -27,7 +27,7 @@
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| itemname      | string     | null: false                    |
+| name          | string     | null: false                    |
 | explanation   | text       | null: false                    |
 | category_id   | integer    | null: false                    |
 | status_id     | integer    | null: false                    |
@@ -63,7 +63,7 @@
 ### shippingaddress テーブル
 
 | postalcode       | string     | null: false                    |
-| prefecture_id    | integer    | null: false                    |
+| area_id          | integer    | null: false                    |
 | municipality     | string     | null: false                    |
 | address          | string     | null: false                    |
 | buildingname     | string     |                                |
