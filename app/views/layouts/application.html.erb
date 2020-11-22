@@ -11,6 +11,20 @@
 </head>
 
 <body>
+    <header class="header">
+      <div class="inner">
+        <% if user_signed_in? %>
+          <div class="user_nav grid-6">
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: :user_nav grid-6 %>
+            <%= link_to "ニックネーム", id:"nickname", class: :grid-6 %>
+          </div>
+        <% else %>
+          <div class="grid-6">
+            <%= link_to "ログイン", new_user_session_path, class: :grid-6 %>
+            <%= link_to "新規登録", new_user_registration_path, class: :grid-6 %>
+          </div>
+        <% end %>
+    </header>
   <%= yield %>
 </body>
 
