@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    Item.create(item_params)
+    # Item.create(item_params)
   end
 
   def destroy
@@ -19,7 +19,11 @@ class ItemsController < ApplicationController
   end
 
   def update
-
+    if current_user.update(user_params)
+    redirect_to root_path
+    else
+    render :edit
+    end
   end
 
   def show
@@ -28,9 +32,11 @@ class ItemsController < ApplicationController
 
   private
 
-  def item_params
-    params.require(:item).permit(:,)
+ # def item_params
+   # params.require(:item).permit(:,)
+  #end
+
+  def user_params
+    params.require(:user).permit(:nickname, :firstname, :lastname, :firstname_kana, :lastname_kana, :bithday)
   end
-
-
 end
