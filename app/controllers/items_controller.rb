@@ -18,13 +18,13 @@ class ItemsController < ApplicationController
   def edit
   end
 
-  def update
-    if current_user.update(user_params)
-    redirect_to root_path
-    else
-    render :edit
-    end
-  end
+  #def update
+   # if current_user.update(user_params)
+    #redirect_to root_path
+    #else
+    #render :edit
+    #end
+  #end
 
   def show
 
@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
    # params.require(:item).permit(:,)
   #end
 
-  def user_params
-    params.require(:user).permit(:nickname, :firstname, :lastname, :firstname_kana, :lastname_kana, :bithday)
-  end
+  #def user_params
+   # params.require(:user).permit(:nickname, :firstname, :lastname, :firstname_kana, :lastname_kana, :bithday)
+  #end
 end
