@@ -7,18 +7,19 @@ class User < ApplicationRecord
   has_many :items
 
   with_options  presence: true do
-    validates :password {with: /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])\w{6,12}\z/}
+    VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])\w{6,12}\z/
+    validates :password, format: { with: VALID_PASSWORD_REGEX}
+
     validates :nickname
-    with_options format: {with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/
+    with_options format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/
     }do
     validates :firstname
     validates :lastname
     end
-    with_options format: {with: /\A[ァ-ヶー－]+\z/}do
+    with_options format: { with: /\A[ァ-ヶー－]+\z/}do
     validates :firstname_kana
     validates :lastname_kana
     end
     validates :bithday
   end
-
 end
