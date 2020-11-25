@@ -3,12 +3,12 @@ class ItemsController < ApplicationController
     @items = Item.all
   end
 
-  #def new
-  #  @item = Item.new
-  #end
+  def new
+    @item = Item.new
+  end
 
   def create
-    # Item.create(item_params)
+     Item.create(item_params)
   end
 
   def destroy
@@ -28,11 +28,8 @@ class ItemsController < ApplicationController
   def show
   end
 
-  # def item_params
-  # params.require(:item).permit(:,)
-  # end
+   def item_params
+   params.require(:item).permit(:name, :explanation, :category_id, :status_id, :deli_price_id, :area_id, :deli_day_id, :price)#.merge(user_id: current_user.id)
+   end
 
-  # def user_params
-  # params.require(:user).permit(:nickname, :firstname, :lastname, :firstname_kana, :lastname_kana, :bithday)
-  # end
 end
