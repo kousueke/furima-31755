@@ -8,7 +8,8 @@ class ItemsController < ApplicationController
   end
 
   def create
-     Item.create(item_params)
+     Item.create.(item_params)
+     #@item = Item.new(item_params)
   end
 
   def destroy
@@ -29,7 +30,7 @@ class ItemsController < ApplicationController
   end
 
    def item_params
-   params.require(:item).permit(:name, :explanation, :category_id, :status_id, :deli_price_id, :area_id, :deli_day_id, :price)#.merge(user_id: current_user.id)
+   params.require(:item).permit(:image, :name, :explanation, :category_id, :status_id, :deli_price_id, :area_id, :deli_day_id, :price)#.merge(user_id: current_user.id)
    end
 
 end
