@@ -15,36 +15,34 @@ RSpec.describe Item, type: :model do
       expect(@item).to be_valid
     end
     it 'category_idが1以外の場合' do
-      @item.category_id = '2'
+      @item.category_id = 2
       expect(@item).to be_valid
     end
     it 'status_idが1以外の場合' do
-      @item.status_id = '2'
+      @item.status_id = 2
       expect(@item).to be_valid
     end
     it 'deli_price_idが1以外の場合' do
-      @item.deli_price_id = '2'
+      @item.deli_price_id = 2
       expect(@item).to be_valid
     end
     it 'area_idが1以外の場合' do
-      @item.area_id = '2'
+      @item.area_id = 2
       expect(@item).to be_valid
     end
     it 'deli_day_idが1以外の場合' do
-      @item.deli_day_id = '2'
+      @item.deli_day_id = 2
       expect(@item).to be_valid
     end
     it 'priceが半角数字の場合' do
-      @item.price = '999'
+      @item.price = 999
       expect(@item).to be_valid
     end
     it 'priceが300~9999999の間の場合' do
-      @item.price = '999'
+      @item.price = 999
       expect(@item).to be_valid
     end
   end
-
-  numericality: { in: 300..9999999 }
 
   
 
@@ -67,41 +65,46 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Explanation can't be blank")
     end
 
-    it '' do
-      @item.password = '12345'
-      @item.password_confirmation = '12345'
+    it 'category_idが1では登録できない' do
+      @item.category_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
+      expect(@item.errors.full_messages).to include("Category Select")
     end
 
-    it '' do
-      @item.password = 'aaaaaaa'
+    it 'status_idが1では登録できない' do
+      @item.status_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Password confirmation doesn't match Password")
+      expect(@item.errors.full_messages).to include("Sales status Select")
     end
 
-    it '' do
-      @item.password = '123456'
+    it 'deli_price_idが1では登録できない' do
+      @item.deli_price_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Password confirmation doesn't match Password")
+      expect(@item.errors.full_messages).to include("Shipping fee status Select")
     end
 
-    it '' do
-      .firstname = nil
+    it 'area_idが1では登録できない' do
+      @item.area_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("First name can't be blank")
+      expect(@item.errors.full_messages).to include("Prefecture Select")
     end
 
-    it '' do
-      @item.lastname = nil
+    it 'deli_day_idが1では登録できない' do
+      @item.deli_day_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Last name can't be blank")
+      expect(@item.errors.full_messages).to include("Scheduled delivery Select")
     end
 
-    it '' do
-      @item.firstname_kana = nil
+    it 'priceは半角数字以外では登録できない' do
+      @item.price = "イチ"
       @item.valid?
-      expect(@item.errors.full_messages).to include("First name kana can't be blank")
+      expect(@item.errors.full_messages).to include("Price Half-width number")
+    end
+
+    it 'priceは300~9999999の間でなければ登録できない' do
+      @item.price = 100
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price Out of setting range")
     end
 
     it 'priceが空では登録できないこと' do
@@ -112,13 +115,3 @@ RSpec.describe Item, type: :model do
   end
   end
 end
-
-image, 
-:name,
- :explanation,
-  :category_id,
-   :status_id,
-   :deli_price_id,
-    :area_id,
-     :deli_day_id,
-      :price
