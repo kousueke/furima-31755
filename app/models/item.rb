@@ -16,7 +16,7 @@ class Item < ApplicationRecord
   end
 
   with_options  numericality: { other_than: 1 } do
-    validates :categiry_id
+    validates :category_id
     validates :status_id
     validates :deli_price_id
     validates :area_id
