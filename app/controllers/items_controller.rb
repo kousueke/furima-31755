@@ -10,8 +10,6 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
   end
-  #- ログイン状態のユーザーだけが、商品出品ページへ遷移できること
-  #- ログアウト状態のユーザーは、商品出品ページへ遷移しようとすると、ログインページへ遷移すること
 
   def create
      #Item.create.(item_params)

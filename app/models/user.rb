@@ -11,15 +11,20 @@ class User < ApplicationRecord
     validates :password, format: { with: VALID_PASSWORD_REGEX}
 
     validates :nickname
-    with_options format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/
-    }do
-    validates :firstname
-    validates :lastname
-    end
-    with_options format: { with: /\A[ァ-ヶー－]+\z/}do
-    validates :firstname_kana
-    validates :lastname_kana
-    end
+
     validates :bithday
   end
+
+  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: "Full-width characters" } do
+    validates :firstname
+    validates :lastname
+  end
+
+  
+  with_options presence: true, format: { with: /\A[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+\z/, message: 'Full-width katakana characters' } do
+    validates :firstname_kana
+    validates :lastname_kana
+   end
+
+
 end
