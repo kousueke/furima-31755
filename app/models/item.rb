@@ -23,5 +23,6 @@ class Item < ApplicationRecord
     validates :deli_day_id
   end
 
-  validates :price, numericality: { in: 300..9999999 }
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+
 end

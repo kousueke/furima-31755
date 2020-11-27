@@ -10,7 +10,7 @@ RSpec.describe Item, type: :model do
     it 'imageとnameとexplanationとcategory_idとstatus_idとdeli_price_idとarea_idとdeli_day_idとpriceが存在すれば登録できること' do
       expect(@item).to be_valid
     end
-    it 'nameが40文字以下の場合' do
+    it 'explanationが40文字以下の場合' do
       @item.name = 'アイウエオ'
       expect(@item).to be_valid
     end
@@ -60,7 +60,7 @@ RSpec.describe Item, type: :model do
     end
 
     it 'explanationが空では登録できないこと' do
-      @item.password = nil
+      @item.explanation = nil
       @item.valid?
       expect(@item.errors.full_messages).to include("Explanation can't be blank")
     end
@@ -74,37 +74,43 @@ RSpec.describe Item, type: :model do
     it 'status_idが1では登録できない' do
       @item.status_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Sales status Select")
+      expect(@item.errors.full_messages).to include("Status Select")
     end
 
     it 'deli_price_idが1では登録できない' do
       @item.deli_price_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Shipping fee status Select")
+      expect(@item.errors.full_messages).to include("Deli price Select")
     end
 
     it 'area_idが1では登録できない' do
       @item.area_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Prefecture Select")
+      expect(@item.errors.full_messages).to include("Area Select")
     end
 
     it 'deli_day_idが1では登録できない' do
       @item.deli_day_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Scheduled delivery Select")
+      expect(@item.errors.full_messages).to include("Deli day Select")
     end
 
     it 'priceは半角数字以外では登録できない' do
       @item.price = "イチ"
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price Half-width number")
+      expect(@item.errors.full_messages).to include("Price is not a number")
     end
 
     it 'priceは300~9999999の間でなければ登録できない' do
       @item.price = 100
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price Out of setting range")
+      expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+    end
+
+    it 'priceは300~9999999の間でなければ登録できない' do
+      @item.price = 10000000
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
     end
 
     it 'priceが空では登録できないこと' do
