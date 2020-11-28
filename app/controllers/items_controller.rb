@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :new]
-
+  before_action :authenticate_user!, except: [:index, :show]
   def index
     #@items = Item.all
   end
@@ -45,9 +44,5 @@ class ItemsController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password)
-  end
-
-  def redirect_root
-    redirect_to user_sessions_path unless user_signed_in?
   end
 end
