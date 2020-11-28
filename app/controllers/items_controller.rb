@@ -1,9 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :redirect_root, except: :new
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, except: [:index, :new]
 
   def index
-    @items = Item.all
+    #@items = Item.all
   end
 
   def new
