@@ -21,6 +21,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @item = Item.new
   end
 
   # def update
