@@ -32,11 +32,11 @@ class ItemsController < ApplicationController
     else
       render :edit
     end
-    #if current_user.update(user_params)
+    # if current_user.update(user_params)
     #  redirect_to root_path
-    #else
+    # else
     #  render :edit
-    #end
+    # end
   end
 
   def show
