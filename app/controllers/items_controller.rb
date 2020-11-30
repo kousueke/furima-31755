@@ -33,7 +33,6 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    # @items = @item.item.includes(:user)
   end
 
   private
