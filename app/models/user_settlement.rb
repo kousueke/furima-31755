@@ -2,26 +2,26 @@ class UserSettlement
 
   include ActiveModel::Model
 
-  attr_accessor :postalcode, :area_id, :municipality, :address, :buildingname, :tell , :buy, :token
+  attr_accessor :postalcode, :area_id, :municipality, :address, :buildingname, :tell , :buy, :token, :user_id, :item_id
   
   with_options presence: true do
-    #tokenのバリデーション
+   
     validates :token
-    #住所のバリデーション
-    validates :postalcode format: { with: /^\d{7}$/, message: '' } do
+    
+    validates :postalcode, format: { with: /\A\d{3}[-]\d{4}\z/, message: 'Postal code Input correctly' }
     validates :area_id
     validates :municipality
     validates :address
     validates :buildingname
-    validates :tell format: { with: /^\d{10}$|^\d{11}$/, message: '' } do
-    #buyのバリデーション
-    validates :user
-    validates :item
+    validates :tell, format: { with: /\A\d{11}\z/, message: 'Phone number Input only number' }
+    
+    validates :user_id
+    validates :item_id
   end
 
 
   def save
-    Buy.create(:user, :item)
-    Shippingaddress.create(:postalcode, :area_id, :municipality, :address, :buildingname, :tell , :buy)
+    buys = Buys.create(user_id: user_id, item_id: item_id)
+    Shippingaddress.create(postalcode: postalcode, area_id: area_id, municipality: municipality, address: address, buildingname: buildingname, tell: tell , buy: buy)
   end
 end
