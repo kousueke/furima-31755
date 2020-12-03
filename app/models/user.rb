@@ -23,4 +23,4 @@ class User < ApplicationRecord
     validates :firstname_kana
     validates :lastname_kana
   end
-end
+end 
