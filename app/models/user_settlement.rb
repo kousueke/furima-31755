@@ -6,8 +6,6 @@ class UserSettlement
   
   with_options presence: true do
    
-    validates :token
-    
     validates :postalcode, format: { with: /\A\d{3}[-]\d{4}\z/, message: 'Postal code Input correctly' }
     validates :area_id
     validates :municipality
@@ -15,6 +13,8 @@ class UserSettlement
     validates :buildingname
     validates :tell, format: { with: /\A\d{11}\z/, message: 'Phone number Input only number' }
     
+    validates :token
+
     validates :user_id
     validates :item_id
   end
