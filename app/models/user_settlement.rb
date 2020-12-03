@@ -2,7 +2,7 @@ class UserSettlement
 
   include ActiveModel::Model
 
-  attr_accessor :postalcode, :area_id, :municipality, :address, :buildingname, :tell , :buy, :token, :user_id, :item_id
+  attr_accessor :postalcode, :area_id, :municipality, :address, :buildingname, :tell, :token, :user_id, :item_id
   
   with_options presence: true do
    
@@ -22,6 +22,6 @@ class UserSettlement
 
   def save
     buys = Buys.create(user_id: user_id, item_id: item_id)
-    Shippingaddress.create(postalcode: postalcode, area_id: area_id, municipality: municipality, address: address, buildingname: buildingname, tell: tell , buy: buy)
+    Shippingaddress.create(postalcode: postalcode, area_id: area_id, municipality: municipality, address: address, buildingname: buildingname, tell: tell , buy_id: buys.id)
   end
 end
