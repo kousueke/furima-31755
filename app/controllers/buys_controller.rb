@@ -4,7 +4,7 @@ class BuysController < ApplicationController
 
   def index
     @user_settlement = UserSettlement.new
-    redirect_to root_path if current_user.id == @item.user_id || @item.buy
+    redirect_to root_path if current_user.id == @item.user_id || if @item.buy.present?
   end
 
   def create

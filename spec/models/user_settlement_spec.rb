@@ -56,6 +56,12 @@ RSpec.describe UserSettlement, type: :model do
       expect(@user_settlement.errors.full_messages).to include('Area must be other than 1')
     end
 
+    it 'area_idが空では登録できない' do
+      @user_settlement.area_id = nil
+      @user_settlement.valid?
+      expect(@user_settlement.errors.full_messages).to include("Area is not a number")
+    end
+
     it 'municipalityが空では登録できないこと' do
       @user_settlement.municipality = nil
       @user_settlement.valid?
