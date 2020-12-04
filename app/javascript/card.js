@@ -1,33 +1,33 @@
 const pay = () => {
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
-  const form = user_settlement.getElementById("charge-form");
+  const form = document.getElementById("charge-form");
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const formResult = user_settlement.getElementById("charge-form");
+    const formResult = document.getElementById("charge-form");
     const formData = new FormData(formResult);
 
     const card = {
-      number: formData.get("buy[number]"),
-      exp_month: formData.get("buy[exp_month]"),
-      exp_year: `20${formData.get("buy[exp_year]")}`,
-      cvc: formData.get("buy[cvc]"),
+      number: formData.get("user_settlement[number]"),
+      exp_month: formData.get("user_settlement[exp_month]"),
+      exp_year: `20${formData.get("user_settlement[exp_year]")}`,
+      cvc: formData.get("user_settlement[cvc]"),
     };
 
     Payjp.createToken(card, (status, response) => {
       if (status == 200) {
         const token = response.id;
-        const renderDom = user_settlement.getElementById("charge-form");
+        const renderDom = document.getElementById("charge-form");
         const tokenObj = `<input value=${token} name='token' type="hidden"> `;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
 
-      user_settlement.getElementById("buy_number").removeAttribute("name");
-      user_settlement.getElementById("buy_exp_month").removeAttribute("name");
-      user_settlement.getElementById("buy_exp_year").removeAttribute("name");
-      user_settlement.getElementById("buy_cvc").removeAttribute("name");
+      document.getElementById("card-number").removeAttribute("name");
+      document.getElementById("card-exp-month").removeAttribute("name");
+      document.getElementById("card-exp-year").removeAttribute("name");
+      document.getElementById("card-cvc").removeAttribute("name");
 
-      user_settlement.getElementById("charge-form").submit();
+      document.getElementById("charge-form").submit();
     });
   });
 };

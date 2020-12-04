@@ -2,12 +2,8 @@ class BuysController < ApplicationController
   def index
     @item = Item.find(params[:item_id])
     @user_settlement = UserSettlement.new
-     unless user_signed_in?
-      redirect_to root_path
-     end
-     if user_signed_in? && current_user.id == @item.user_id
-      redirect_to root_path
-     end
+    redirect_to root_path unless user_signed_in?
+    redirect_to root_path if user_signed_in? && current_user.id == @item.user_id
   end
 
   def create
@@ -16,7 +12,7 @@ class BuysController < ApplicationController
     if @user_settlement.valid?
       pay_item
       @user_settlement.save
-      return redirect_to root_path
+      redirect_to root_path
     else
       render :index
     end
@@ -25,16 +21,15 @@ class BuysController < ApplicationController
   private
 
   def buy_params
-    params.require(:user_settlement).permit(:postalcode, :area_id, :municipality, :address, :buildingname, :tell, :user_id, :item_id).merge(token: params[:token])
+    params.require(:user_settlement).permit(:postalcode, :area_id, :municipality, :address, :buildingname, :tell).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id])
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
-      amount: user_settlement_params[:user_id, :item_id],
-      card: user_settlement_params[:token],
+      amount: @item.price,
+      card: params[:token],
       currency: 'jpy'
     )
   end
-  
 end

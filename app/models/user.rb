@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :items
   has_many :comments
   has_many :buys
-  
+
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)\w{6,12}\z/.freeze
   validates :password, format: { with: VALID_PASSWORD_REGEX }
 
@@ -26,4 +26,4 @@ class User < ApplicationRecord
     validates :firstname_kana
     validates :lastname_kana
   end
-end 
+end
