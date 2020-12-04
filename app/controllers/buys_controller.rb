@@ -1,8 +1,8 @@
 class BuysController < ApplicationController
+  before_action :authenticate_user!, only: :index
   def index
     @item = Item.find(params[:item_id])
     @user_settlement = UserSettlement.new
-    redirect_to root_path unless user_signed_in?
     redirect_to root_path if user_signed_in? && current_user.id == @item.user_id
   end
 

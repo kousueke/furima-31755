@@ -71,8 +71,14 @@ RSpec.describe UserSettlement, type: :model do
       expect(@user_settlement.errors.full_messages).to include("Tell can't be blank")
     end
 
-    it 'tellが数字のみ出ない場合は登録できない' do
+    it 'tellが数字のみでない場合は登録できない' do
       @user_settlement.tell = '090-1234-5678'
+      @user_settlement.valid?
+      expect(@user_settlement.errors.full_messages).to include('Tell Phone number Input only number')
+    end
+
+    it 'tellが11桁を超える場合は登録できない' do
+      @user_settlement.tell = '0900123405678'
       @user_settlement.valid?
       expect(@user_settlement.errors.full_messages).to include('Tell Phone number Input only number')
     end
