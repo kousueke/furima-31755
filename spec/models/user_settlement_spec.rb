@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe UserSettlement, type: :model do
   before do
-    # @user_settlement = FactoryBot.build(:user_settlement)
     user = FactoryBot.create(:user)
     item = FactoryBot.create(:item)
     @user_settlement = FactoryBot.build(:user_settlement, user_id: user.id, item_id: item.id)
@@ -30,6 +29,10 @@ RSpec.describe UserSettlement, type: :model do
     end
     it 'tellが11桁以下なこと' do
       @user_settlement.tell = '09012345678'
+      expect(@user_settlement).to be_valid
+    end
+    it 'buildingnameがからでも登録できる' do
+      @user_settlement.buildingname = nil
       expect(@user_settlement).to be_valid
     end
   end
