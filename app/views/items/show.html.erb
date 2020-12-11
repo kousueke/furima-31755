@@ -83,7 +83,6 @@
     </div>
   </div>
   <%# /商品の概要 %>
-
   <div class="comment-box">
     <% if current_user %>
     <%= form_with model: [@item, @comment], url: item_comments_path(@item.id), local: true do |f| %>
@@ -93,9 +92,11 @@
         <br>
         不快な言葉遣いなどは利用制限や退会処分となることがあります。
       </div>
+      <% unless @item.buy.present? %>
       <%= f.submit"コメントする", class:"comment-btn" %>
         <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
         <span>コメントする<span>
+      <% end %>
       </div>
     <% end %>
     <% else %>
